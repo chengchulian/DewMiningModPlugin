@@ -1,0 +1,672 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
+            Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{26445395-CBE5-4EFF-AD4B-15BA80BC8F4A}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>DewMiningModPlugin</RootNamespace>
+        <AssemblyName>DewMiningModPlugin</AssemblyName>
+        <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <LangVersion>12</LangVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="0Harmony">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\0Harmony.dll</HintPath>
+        </Reference>
+        <Reference Include="AllIn1SpriteShaderAssembly">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\AllIn1SpriteShaderAssembly.dll</HintPath>
+        </Reference>
+        <Reference Include="Assembly-CSharp">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Assembly-CSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="AutoUseSkill">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\AutoUseSkill.dll</HintPath>
+        </Reference>
+        <Reference Include="BepInEx.Core">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\BepInEx.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="BepInEx.Unity">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\BepInEx.Unity.dll</HintPath>
+        </Reference>
+        <Reference Include="BouncyCastle.Crypto">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\BouncyCastle.Crypto.dll</HintPath>
+        </Reference>
+        <Reference Include="Cinemachine">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Cinemachine.dll</HintPath>
+        </Reference>
+        <Reference Include="ClassLibrary1">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\ClassLibrary1.dll</HintPath>
+        </Reference>
+        <Reference Include="Coffee.UIParticle">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Coffee.UIParticle.dll</HintPath>
+        </Reference>
+        <Reference Include="com.rlabrecque.steamworks.net">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\com.rlabrecque.steamworks.net.dll</HintPath>
+        </Reference>
+        <Reference Include="DemiLib">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\DemiLib.dll</HintPath>
+        </Reference>
+        <Reference Include="Dew.Contents">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Dew.Contents.dll</HintPath>
+        </Reference>
+        <Reference Include="Dew.Core">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Dew.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="Dew.External">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Dew.External.dll</HintPath>
+        </Reference>
+        <Reference Include="Dew.UI">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Dew.UI.dll</HintPath>
+        </Reference>
+        <Reference Include="DewCustomizeMod">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\DewCustomizeMod.dll</HintPath>
+        </Reference>
+        <Reference Include="DOTween">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\DOTween.dll</HintPath>
+        </Reference>
+        <Reference Include="DOTweenPro">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\DOTweenPro.dll</HintPath>
+        </Reference>
+        <Reference Include="DTT.AreaOfEffectRegions.Demo">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\DTT.AreaOfEffectRegions.Demo.dll</HintPath>
+        </Reference>
+        <Reference Include="DTT.AreaOfEffectRegions.Runtime">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\DTT.AreaOfEffectRegions.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="DTT.EditorUtilities.Demo">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\DTT.EditorUtilities.Demo.dll</HintPath>
+        </Reference>
+        <Reference Include="DTT.PublishingTools.Runtime">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\DTT.PublishingTools.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="DTT.RuntimeUtilities.Demo">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\DTT.RuntimeUtilities.Demo.dll</HintPath>
+        </Reference>
+        <Reference Include="DTT.RuntimeUtilities.Runtime">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\DTT.RuntimeUtilities.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="ExternalAttributes.Core">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\ExternalAttributes.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="Febucci.Attributes.Runtime">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Febucci.Attributes.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Febucci.TextAnimator.Demo.Runtime">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Febucci.TextAnimator.Demo.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Febucci.TextAnimator.Runtime">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Febucci.TextAnimator.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Febucci.TextAnimator.TMP.Runtime">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Febucci.TextAnimator.TMP.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="FizzySteamworks">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\FizzySteamworks.dll</HintPath>
+        </Reference>
+        <Reference Include="FlatKit.Runtime">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\FlatKit.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="inc8877.GraphicsConfigurator">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\inc8877.GraphicsConfigurator.dll</HintPath>
+        </Reference>
+        <Reference Include="JBooth.MicroSplat.Core">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\JBooth.MicroSplat.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="kcp2k">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\kcp2k.dll</HintPath>
+        </Reference>
+        <Reference Include="Limworks.Graphics.URP.SSR">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Limworks.Graphics.URP.SSR.dll</HintPath>
+        </Reference>
+        <Reference Include="MagicaClothV2">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\MagicaClothV2.dll</HintPath>
+        </Reference>
+        <Reference Include="Microsoft.CodeAnalysis">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Microsoft.CodeAnalysis.dll</HintPath>
+        </Reference>
+        <Reference Include="MiddlewareTransport">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\MiddlewareTransport.dll</HintPath>
+        </Reference>
+        <Reference Include="Mirror">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Mirror.dll</HintPath>
+        </Reference>
+        <Reference Include="Mirror.Authenticators">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Mirror.Authenticators.dll</HintPath>
+        </Reference>
+        <Reference Include="Mirror.Components">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Mirror.Components.dll</HintPath>
+        </Reference>
+        <Reference Include="Mirror.Transports">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Mirror.Transports.dll</HintPath>
+        </Reference>
+        <Reference Include="Mono.Security">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Mono.Security.dll</HintPath>
+        </Reference>
+        <Reference Include="MultiplexTransport">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\MultiplexTransport.dll</HintPath>
+        </Reference>
+        <Reference Include="NavMeshComponents">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\NavMeshComponents.dll</HintPath>
+        </Reference>
+        <Reference Include="NCalc">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\NCalc.dll</HintPath>
+        </Reference>
+        <Reference Include="netstandard">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\netstandard.dll</HintPath>
+        </Reference>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Newtonsoft.Json.dll</HintPath>
+        </Reference>
+        <Reference Include="RuntimeInspector.Runtime">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\RuntimeInspector.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="sc.posteffects.runtime">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\sc.posteffects.runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="SimpleWebTransport">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\SimpleWebTransport.dll</HintPath>
+        </Reference>
+        <Reference Include="SingularityGroup.HotReload.Runtime">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\SingularityGroup.HotReload.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="SingularityGroup.HotReload.Runtime.Public">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\SingularityGroup.HotReload.Runtime.Public.dll</HintPath>
+        </Reference>
+        <Reference Include="Sirenix.OdinInspector.Attributes">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Sirenix.OdinInspector.Attributes.dll</HintPath>
+        </Reference>
+        <Reference Include="Sirenix.OdinInspector.CompatibilityLayer">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Sirenix.OdinInspector.CompatibilityLayer.dll</HintPath>
+        </Reference>
+        <Reference Include="Sirenix.Serialization">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Sirenix.Serialization.dll</HintPath>
+        </Reference>
+        <Reference Include="Sirenix.Serialization.Config">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Sirenix.Serialization.Config.dll</HintPath>
+        </Reference>
+        <Reference Include="Sirenix.Utilities">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Sirenix.Utilities.dll</HintPath>
+        </Reference>
+        <Reference Include="System"/>
+        <Reference Include="System.Buffers">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.Buffers.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Collections.Immutable">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.Collections.Immutable.dll</HintPath>
+        </Reference>
+        <Reference Include="System.ComponentModel.Composition">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.ComponentModel.Composition.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Configuration">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.Configuration.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Core"/>
+        <Reference Include="System.Data"/>
+        <Reference Include="System.Data.DataSetExtensions">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.Data.DataSetExtensions.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Drawing">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.Drawing.dll</HintPath>
+        </Reference>
+        <Reference Include="System.EnterpriseServices">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.EnterpriseServices.dll</HintPath>
+        </Reference>
+        <Reference Include="System.IO.Compression">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.IO.Compression.dll</HintPath>
+        </Reference>
+        <Reference Include="System.IO.Compression.FileSystem">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.IO.Compression.FileSystem.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Memory">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.Memory.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Net.Http">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.Net.Http.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Numerics">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.Numerics.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Reflection.Metadata">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.Reflection.Metadata.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Runtime">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Runtime.CompilerServices.Unsafe">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Runtime.Serialization">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.Runtime.Serialization.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Security">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.Security.dll</HintPath>
+        </Reference>
+        <Reference Include="System.ServiceModel.Internals">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.ServiceModel.Internals.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Text.Encoding.CodePages">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.Text.Encoding.CodePages.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Threading.Tasks.Extensions">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.Threading.Tasks.Extensions.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Transactions">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.Transactions.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Xml"/>
+        <Reference Include="System.Xml.Linq">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\System.Xml.Linq.dll</HintPath>
+        </Reference>
+        <Reference Include="Telepathy">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Telepathy.dll</HintPath>
+        </Reference>
+        <Reference Include="UniTask">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UniTask.dll</HintPath>
+        </Reference>
+        <Reference Include="UniTask.Addressables">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UniTask.Addressables.dll</HintPath>
+        </Reference>
+        <Reference Include="UniTask.DOTween">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UniTask.DOTween.dll</HintPath>
+        </Reference>
+        <Reference Include="UniTask.Linq">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UniTask.Linq.dll</HintPath>
+        </Reference>
+        <Reference Include="UniTask.TextMeshPro">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UniTask.TextMeshPro.dll</HintPath>
+        </Reference>
+        <Reference Include="unity-websocket-sharp">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\unity-websocket-sharp.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Addressables">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Addressables.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Burst">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Burst.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Burst.Unsafe">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Burst.Unsafe.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Collections">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Collections.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Collections.LowLevel.ILSupport">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.InputSystem">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.InputSystem.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.InputSystem.ForUI">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.InputSystem.ForUI.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Mathematics">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Mathematics.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.MemoryProfiler">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.MemoryProfiler.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Profiling.Core">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Profiling.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Recorder">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Recorder.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Recorder.Base">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Recorder.Base.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.RenderPipelines.Core.Runtime">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.RenderPipelines.Universal.Runtime">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.RenderPipelines.Universal.Shaders">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.ResourceManager">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.ResourceManager.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.ScriptableBuildPipeline">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.ScriptableBuildPipeline.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Services.Analytics">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Services.Analytics.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Services.Authentication">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Services.Authentication.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Services.Core">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Services.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Services.Core.Analytics">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Services.Core.Analytics.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Services.Core.Configuration">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Services.Core.Configuration.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Services.Core.Device">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Services.Core.Device.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Services.Core.Environments">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Services.Core.Environments.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Services.Core.Environments.Internal">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Services.Core.Environments.Internal.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Services.Core.Internal">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Services.Core.Internal.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Services.Core.Networking">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Services.Core.Networking.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Services.Core.Registration">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Services.Core.Registration.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Services.Core.Scheduler">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Services.Core.Scheduler.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Services.Core.Telemetry">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Services.Core.Telemetry.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Services.Core.Threading">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Services.Core.Threading.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Services.Lobbies">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Services.Lobbies.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Services.Wire.Internal">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Services.Wire.Internal.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.TerrainTools">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.TerrainTools.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.TextMeshPro">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.TextMeshPro.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Timeline">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.Timeline.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.VisualEffectGraph.Runtime">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\Unity.VisualEffectGraph.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AccessibilityModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.AccessibilityModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AIModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.AIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AndroidJNIModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.AndroidJNIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AnimationModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.AnimationModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ARModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.ARModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AssetBundleModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.AssetBundleModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AudioModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.AudioModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ClothModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.ClothModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ClusterInputModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.ClusterInputModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ClusterRendererModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.ClusterRendererModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CrashReportingModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.CrashReportingModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.DirectorModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.DirectorModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.DSPGraphModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.DSPGraphModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.GameCenterModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.GameCenterModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.GIModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.GIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.GridModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.GridModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.HotReloadModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.HotReloadModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ImageConversionModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.ImageConversionModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.IMGUIModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.IMGUIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.InputLegacyModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.InputLegacyModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.InputModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.InputModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.JSONSerializeModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.JSONSerializeModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.LocalizationModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.LocalizationModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.NVIDIAModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.NVIDIAModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ParticleSystemModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.ParticleSystemModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.PerformanceReportingModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.PerformanceReportingModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.Physics2DModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.Physics2DModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.PhysicsModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.PhysicsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ProfilerModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.ProfilerModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ScreenCaptureModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.ScreenCaptureModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.SharedInternalsModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.SharedInternalsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.SpatialTracking">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.SpatialTracking.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.SpriteMaskModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.SpriteMaskModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.SpriteShapeModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.SpriteShapeModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.StreamingModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.StreamingModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.SubstanceModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.SubstanceModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.SubsystemsModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.SubsystemsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TerrainModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.TerrainModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TerrainPhysicsModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TextCoreFontEngineModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TextCoreTextEngineModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.TextCoreTextEngineModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TextRenderingModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.TextRenderingModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TilemapModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.TilemapModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TLSModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.TLSModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UI">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.UI.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UIElementsModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.UIElementsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UIElementsNativeModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.UIElementsNativeModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UIModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.UIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UmbraModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.UmbraModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UNETModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.UNETModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityAnalyticsCommonModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityAnalyticsModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityConnectModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.UnityConnectModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityCurlModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.UnityCurlModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityTestProtocolModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.UnityWebRequestModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestTextureModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.VehiclesModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.VehiclesModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.VFXModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.VFXModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.VideoModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.VideoModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.VirtualTexturingModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.VirtualTexturingModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.VRModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.VRModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.WindModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.WindModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.XR.LegacyInputHelpers">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.XRModule">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityEngine.XRModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityUIExtensions">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\UnityUIExtensions.dll</HintPath>
+        </Reference>
+        <Reference Include="websocket-sharp">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\websocket-sharp.dll</HintPath>
+        </Reference>
+        <Reference Include="XNode">
+          <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams Demo\BepInEx\plugins\lib\XNode.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Constant.cs" />
+        <Compile Include="DewMiningModPlugin.cs" />
+        <Compile Include="entry\MonsterSpawnData.cs" />
+        <Compile Include="entry\RewardEntry.cs" />
+        <Compile Include="handler\MiningLoadRoomHandler.cs" />
+        <Compile Include="handler\StoneGoldOnDeathHandler.cs" />
+        <Compile Include="patch\ActorPatch.cs" />
+        <Compile Include="patch\GameManagerPatch.cs" />
+        <Compile Include="patch\PropEntityPatch.cs" />
+        <Compile Include="patch\PropEnt_Stone_GoldPatch.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="util\MessageUtil.cs" />
+        <Compile Include="util\MiningRewardUtil.cs" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+
+</Project>
