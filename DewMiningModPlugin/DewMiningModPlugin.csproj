@@ -652,7 +652,6 @@
         <Compile Include="entry\RewardEntry.cs" />
         <Compile Include="handler\MiningLoadRoomHandler.cs" />
         <Compile Include="handler\StoneGoldOnDeathHandler.cs" />
-        <Compile Include="patch\ActorPatch.cs" />
         <Compile Include="patch\GameManagerPatch.cs" />
         <Compile Include="patch\PropEntityPatch.cs" />
         <Compile Include="patch\PropEnt_Stone_GoldPatch.cs" />

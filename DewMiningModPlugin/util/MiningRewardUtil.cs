@@ -17,7 +17,7 @@ public static class MiningRewardUtil
 
     [Tooltip("怪物奖励触发时生成的最大怪物数量。")] private static int maxMonsterSpawnCount = 5;
 
-    [Tooltip("每个区域允许的黄金石怪物最大数量")] private static int maxStoneMonstersPerZone = 15;
+    [Tooltip("每个房间允许的黄金石怪物最大数量")] private static int maxStoneMonstersPerRoom = 15;
 
 
     [Tooltip("每个生成的怪物成为元素生物的概率(0-1)。")] private static float elementalChance = 0.035f;
@@ -35,7 +35,7 @@ public static class MiningRewardUtil
     
 
     // 线程安全锁
-    private static readonly object _zoneCountLock = new();
+    private static readonly object _roomMonsterCountLock = new();
 
     // 怪物预制体缓存用于性能
     private static readonly Dictionary<string, Monster> monsterPrefabCache = new();
@@ -43,8 +43,8 @@ public static class MiningRewardUtil
     // 预分配对象
     private static WaitForSeconds spawnBatchWait = new(monsterSpawnBatchDelay);
 
-    // 区域怪物计数器 (zoneIndex -> count)
-    private static readonly Dictionary<int, int> _stoneMonsterCountByZone = new();
+    // 房间怪物计数器 (zoneIndex -> count)
+    private static readonly Dictionary<int, int> _roomMonsterCountMap = new();
 
     private static readonly Stack<List<MonsterSpawnData>> spawnDataListPool = new Stack<List<MonsterSpawnData>>(2);
 
@@ -122,6 +122,15 @@ public static class MiningRewardUtil
             }
         }
     }
+    
+    public static IEnumerator SpawnMiniBossCoroutine(PropEnt_Stone_Gold gold)
+    {
+        yield return WaitUntilCanSpawnStoneMonsterCoroutine();
+        SpawnMiniBossOptimized(gold);
+    }
+    
+    
+    
     public static void SpawnMiniBossOptimized(PropEnt_Stone_Gold gold)
     {
         var pos = gold.transform.position;
@@ -130,13 +139,7 @@ public static class MiningRewardUtil
         var _zoneManager = NetworkedManagerBase<ZoneManager>.instance;
 
         if (_room?.monsters == null) return;
-
-        // 检查区域怪物上限
-        if (!CanSpawnStoneMonster())
-        {
-            MessageUtil.SendChatMessageOptimized("<color=#FF6B6B>区域怪物已达上限，无法生成迷你首领!</color>");
-            return;
-        }
+        
 
         // 存储原始值以便稍后恢复
         int originalBossCount = AttrCustomizeResources.Config.bossCount;
@@ -196,22 +199,18 @@ public static class MiningRewardUtil
         var _zoneManager = NetworkedManagerBase<ZoneManager>.instance;
 
         var basePos = gold.transform.position;
-
-        // 检查区域怪物上限
-        if (!CanSpawnStoneMonster())
-        {
-            MessageUtil.SendChatMessageOptimized("<color=#FF6B6B>区域怪物已达上限，无法生成更多怪物!</color>");
-            yield break;
-        }
+        
+        //自旋等待可生成
+        yield return WaitUntilCanSpawnStoneMonsterCoroutine();
 
         int count = UnityEngine.Random.Range(minMonsterSpawnCount, maxMonsterSpawnCount + 1);
 
-        // 动态调整生成数量（考虑区域上限）
+        // 动态调整生成数量（考虑房间上限）
         int availableInZone;
-        lock (_zoneCountLock)
+        lock (_roomMonsterCountLock)
         {
-            availableInZone = maxStoneMonstersPerZone -
-                              (_stoneMonsterCountByZone.TryGetValue(_zoneManager.currentZoneIndex, out int currentCount)
+            availableInZone = maxStoneMonstersPerRoom -
+                              (_roomMonsterCountMap.TryGetValue(_zoneManager.currentZoneIndex, out int currentCount)
                                   ? currentCount
                                   : 0);
         }
@@ -299,12 +298,8 @@ public static class MiningRewardUtil
         int spawned = 0;
         foreach (var data in spawnDataList)
         {
-            // 再次检查区域上限（防止生成过程中上限变化）
-            if (!CanSpawnStoneMonster())
-            {
-                MessageUtil.SendChatMessageOptimized("<color=#FF6B6B>区域怪物已达上限，停止生成!</color>");
-                break;
-            }
+            // 再次检查房间上限（防止生成过程中上限变化）
+            yield return WaitUntilCanSpawnStoneMonsterCoroutine();
 
             SpawnMonsterOptimized(data, gold);
             spawned++;
@@ -325,9 +320,9 @@ public static class MiningRewardUtil
     {
         var _zoneManager = NetworkedManagerBase<ZoneManager>.instance;
         int currentZone = _zoneManager.currentZoneIndex;
-        lock (_zoneCountLock)
+        lock (_roomMonsterCountLock)
         {
-            _stoneMonsterCountByZone[currentZone] = _stoneMonsterCountByZone.TryGetValue(currentZone, out int count)
+            _roomMonsterCountMap[currentZone] = _roomMonsterCountMap.TryGetValue(currentZone, out int count)
                 ? count + 1
                 : 1;
         }
@@ -361,11 +356,11 @@ public static class MiningRewardUtil
 
     private static void DecrementStoneMonsterCount(int zoneIndex)
     {
-        lock (_zoneCountLock)
+        lock (_roomMonsterCountLock)
         {
-            if (_stoneMonsterCountByZone.TryGetValue(zoneIndex, out int count) && count > 0)
+            if (_roomMonsterCountMap.TryGetValue(zoneIndex, out int count) && count > 0)
             {
-                _stoneMonsterCountByZone[zoneIndex] = count - 1;
+                _roomMonsterCountMap[zoneIndex] = count - 1;
             }
         }
     }
@@ -410,7 +405,7 @@ public static class MiningRewardUtil
 
             _room?.monsters?.onAfterSpawn?.Invoke(monster);
 
-            // 增加区域怪物计数
+            // 增加房间怪物计数
             IncrementStoneMonsterCount();
             int currentZone = _zoneManager.currentZoneIndex;
 
@@ -451,25 +446,35 @@ public static class MiningRewardUtil
         }
     }
 
-    private static bool CanSpawnStoneMonster()
+    
+    private static IEnumerator WaitUntilCanSpawnStoneMonsterCoroutine(float timeoutSeconds = 30f)
     {
         var _zoneManager = NetworkedManagerBase<ZoneManager>.instance;
-
         int currentZone = _zoneManager.currentZoneIndex;
+        float startTime = Time.time;
 
-        lock (_zoneCountLock)
+        while (true)
         {
-            // 获取当前区域计数
-            if (!_stoneMonsterCountByZone.TryGetValue(currentZone, out int count))
+            lock (_roomMonsterCountLock)
             {
-                count = 0;
-                _stoneMonsterCountByZone[currentZone] = count;
+                if (!_roomMonsterCountMap.TryGetValue(currentZone, out int count))
+                {
+                    _roomMonsterCountMap[currentZone] = 0;
+                    yield break;
+                }
+                if (count < maxStoneMonstersPerRoom)
+                    yield break;
             }
 
-            return count < maxStoneMonstersPerZone;
+            if (Time.time - startTime > timeoutSeconds)
+            {
+                Debug.Log($"等待超时：区域怪物仍达上限，停止生成!");
+                yield break;
+            }
+            
+            yield return new WaitForSeconds(0.5f);
         }
     }
-
     private static List<MonsterSpawnData> GetSpawnDataList()
     {
         if (spawnDataListPool.Count > 0)
@@ -622,13 +627,9 @@ public static class MiningRewardUtil
         var _zoneManager = NetworkedManagerBase<ZoneManager>.instance;
         var _actorManager = NetworkedManagerBase<ActorManager>.instance;
         var _gameManager = NetworkedManagerBase<GameManager>.instance;
-
-        // 检查区域怪物上限
-        if (!CanSpawnStoneMonster())
-        {
-            MessageUtil.SendChatMessageOptimized("<color=#FF6B6B>区域怪物已达上限，无法生成首领!</color>");
-            yield break;
-        }
+        
+        //自旋等待可生成
+        yield return WaitUntilCanSpawnStoneMonsterCoroutine();
         
         yield return new WaitForSeconds(0.1f); // 短暂延迟
         
@@ -653,7 +654,7 @@ public static class MiningRewardUtil
             
             if (boss != null)
             {
-                // 增加区域怪物计数
+                // 增加房间怪物计数
                 IncrementStoneMonsterCount();
                 int currentZone = _zoneManager.currentZoneIndex;
                 
@@ -664,5 +665,19 @@ public static class MiningRewardUtil
         
         MessageUtil.SendChatMessageOptimized("<color=#FF4F4F>Boss！Boss！Boss!</color>被挖了出来!");
     }
+
     
+    public static void ResetRoomMonsterCount(EventInfoLoadRoom obj)
+    {
+        ResetRoomMonsterCount();
+    }
+    public static void ResetRoomMonsterCount()
+    {
+        lock (_roomMonsterCountLock)
+        {
+            _roomMonsterCountMap.Clear();
+        }
+    }
+    
+
 }

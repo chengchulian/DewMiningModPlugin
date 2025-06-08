@@ -17,10 +17,6 @@ public static class StoneGoldOnDeathHandler
     [Tooltip("每个区域索引的额外金币乘数。")] private static float perZoneGoldMultiplier = 0.6f;
 
 
-    // 宝石槽奖励的硬编码开关
-    private const bool ENABLE_GEMSLOT_REWARD = true;
-
-
     private static float totalWeightWithGemslot;
     private static float totalWeightWithoutGemslot;
 
@@ -49,6 +45,7 @@ public static class StoneGoldOnDeathHandler
 
     public static void ProcessDeathRewards(PropEnt_Stone_Gold gold, EventInfoKill info)
     {
+        var _room = SingletonDewNetworkBehaviour<Room>.instance;
         var _zoneManager = NetworkedManagerBase<ZoneManager>.instance;
         var _pickupManager = NetworkedManagerBase<PickupManager>.instance;
         // 立即掉落金币
@@ -67,18 +64,18 @@ public static class StoneGoldOnDeathHandler
         string selectedReward = SelectRewardOptimized();
         if (!string.IsNullOrEmpty(selectedReward))
         {
-            gold.StartCoroutine(ProcessRewardDelayed(selectedReward, gold));
+            _room.StartCoroutine(ProcessRewardDelayed(selectedReward, gold));
         }
     }
 
 
     private static string SelectRewardOptimized()
     {
-        float total = ENABLE_GEMSLOT_REWARD ? totalWeightWithGemslot : totalWeightWithoutGemslot;
+        float total = Constant.ENABLE_GEMSLOT_REWARD ? totalWeightWithGemslot : totalWeightWithoutGemslot;
         float roll = UnityEngine.Random.value * total;
         float accumulator = 0f;
         
-        int endIndex = ENABLE_GEMSLOT_REWARD ? REWARDS.Length : REWARDS.Length - 1;
+        int endIndex = Constant.ENABLE_GEMSLOT_REWARD ? REWARDS.Length : REWARDS.Length - 1;
         
         for (int i = 0; i < endIndex; i++)
         {
@@ -116,6 +113,7 @@ public static class StoneGoldOnDeathHandler
 
     private static void ProcessReward(string reward, PropEnt_Stone_Gold gold)
     {
+        var _room = SingletonDewNetworkBehaviour<Room>.instance;
         var pos = gold.transform.position;
 
         switch (reward)
@@ -126,11 +124,11 @@ public static class StoneGoldOnDeathHandler
             case "monster":
                 if (UnityEngine.Random.value < miniBossChance)
                 {
-                    MiningRewardUtil.SpawnMiniBossOptimized(gold);
+                    _room.StartCoroutine(MiningRewardUtil.SpawnMiniBossCoroutine(gold)) ;
                 }
                 else
                 {
-                    gold.StartCoroutine(MiningRewardUtil.SpawnMonstersBatched(gold));
+                    _room.StartCoroutine(MiningRewardUtil.SpawnMonstersBatched(gold));
                 }
 
                 break;
@@ -167,7 +165,7 @@ public static class StoneGoldOnDeathHandler
                 break;
 
             case "boss":
-                gold.StartCoroutine(MiningRewardUtil.SpawnBossFullyOptimized(gold));
+                _room.StartCoroutine(MiningRewardUtil.SpawnBossFullyOptimized(gold));
                 break;
         }
     }
