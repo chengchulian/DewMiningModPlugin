@@ -12,11 +12,7 @@ namespace DewMiningModPlugin.handler;
 
 public static class StoneGoldOnDeathHandler
 {
-    [Tooltip("区域缩放前应用的基础金币乘数。")] private static float baseGoldMultiplier = 1.5f;
-
-    [Tooltip("每个区域索引的额外金币乘数。")] private static float perZoneGoldMultiplier = 0.6f;
-
-
+    
     private static float totalWeightWithGemslot;
     private static float totalWeightWithoutGemslot;
 
@@ -46,19 +42,6 @@ public static class StoneGoldOnDeathHandler
     public static void ProcessDeathRewards(PropEnt_Stone_Gold gold, EventInfoKill info)
     {
         var _room = SingletonDewNetworkBehaviour<Room>.instance;
-        var _zoneManager = NetworkedManagerBase<ZoneManager>.instance;
-        var _pickupManager = NetworkedManagerBase<PickupManager>.instance;
-        // 立即掉落金币
-        float goldValue = (baseGoldMultiplier + perZoneGoldMultiplier * _zoneManager.currentZoneIndex)
-                          * DewPlayer.humanPlayers.Count;
-
-        _pickupManager.DropGold(
-            isKillGold: false,
-            isGivenByOtherPlayer: false,
-            DewMath.RandomRoundToInt(goldValue),
-            gold.transform.position
-        );
-
 
         // 延迟选择和处理奖励
         string selectedReward = SelectRewardOptimized();
