@@ -36,6 +36,11 @@ public static class MiningLoadRoomHandler
             list.Remove("RoomMod_GravityTraining");
             list.Remove("RoomMod_LeafPuppies");
             list.Remove("RoomMod_StarCookie");
+            list.Remove("RoomMod_DistantMemories");
+        }
+        if (NetworkedManagerBase<ZoneManager>.instance.currentNode.type == WorldNodeType.Merchant)
+        {
+            list.Clear();
         }
 
         string roommod = list[Mathf.FloorToInt(Random.value * list.Count)];
