@@ -15,14 +15,6 @@ public class MessageUtil
     
     private static readonly Stack<StringBuilder> stringBuilderPool = new(4);
     
-    // 稀有度颜色查找表
-    private static readonly Dictionary<Rarity, string> RarityColors = new Dictionary<Rarity, string>
-    {
-        { Rarity.Common, "#FFFFFF" },
-        { Rarity.Rare, "#00FFFF" },
-        { Rarity.Epic, "#FF33FF" },
-        { Rarity.Legendary, "#FFA500" }
-    };
     public static void SendChatMessageOptimized(string content)
     {
         ChatManager _chatManager = SingletonDewNetworkBehaviour<ChatManager>.instance;
@@ -115,18 +107,4 @@ public class MessageUtil
         }
         return new StringBuilder(256);
     }
-    public static void BroadcastLootMessage(string playerName, string itemName, Rarity rarity, int value, bool isSkill)
-    {
-        var sb = GetStringBuilder();
-        string cleanName = itemName.Contains("_") ? itemName.Substring(itemName.LastIndexOf('_') + 1) : itemName;
-        
-        sb.AppendFormat("<b><color=#62BCE2>{0}</color></b>: 挖到了 <color={1}>{2} {3}: {4} ({5}{6})</color>",
-            playerName, RarityColors[rarity], rarity, isSkill ? "技能" : "宝石", 
-            cleanName, isSkill ? "等级 " : "", value, isSkill ? "" : "%");
-        
-        SendChatMessageOptimized(sb.ToString());
-        ReturnStringBuilder(sb);
-    }
-
-
 }

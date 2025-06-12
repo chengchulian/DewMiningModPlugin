@@ -7,14 +7,11 @@ namespace DewMiningModPlugin.handler;
 
 public static class MiningLoadRoomHandler
 {
-    
-    
-    
     public static void AddRandomRoomMod(EventInfoLoadRoom obj)
     {
         AddRandomRoomMod();
-
     }
+
     public static void SpawnGoldStones(EventInfoLoadRoom obj)
     {
         SpawnGoldStones();
@@ -38,6 +35,7 @@ public static class MiningLoadRoomHandler
             list.Remove("RoomMod_StarCookie");
             list.Remove("RoomMod_DistantMemories");
         }
+
         if (NetworkedManagerBase<ZoneManager>.instance.currentNode.type == WorldNodeType.Merchant)
         {
             list.Clear();
@@ -62,11 +60,10 @@ public static class MiningLoadRoomHandler
 
         if (roommod.Length > 5)
         {
-            
             Dew.CallDelayed(delegate
             {
                 Debug.Log($"[MiningLoadRoomHandler] Adding modifier: {roommod}");
-            
+
                 NetworkedManagerBase<ZoneManager>.instance.AddModifier(
                     NetworkedManagerBase<ZoneManager>.instance.currentNodeIndex, new ModifierData
                     {
@@ -74,7 +71,6 @@ public static class MiningLoadRoomHandler
                         clientData = null
                     });
             }, 60);
-
         }
     }
 
@@ -95,11 +91,14 @@ public static class MiningLoadRoomHandler
 
     private static void RemoveBarrier()
     {
-        Room_Barrier[] array = Object.FindObjectsOfType<Room_Barrier>();
-        foreach (var barrier in array)
+        Dew.CallDelayed(delegate
         {
-            NetworkServer.Destroy(barrier.gameObject);
-        }
+            Room_Barrier[] array = Object.FindObjectsOfType<Room_Barrier>();
+            foreach (var barrier in array)
+            {
+                NetworkServer.Destroy(barrier.gameObject);
+            }
+        }, 60);
     }
 
     private static IEnumerator SpawnGoldStonesDelayed()
@@ -213,7 +212,8 @@ public static class MiningLoadRoomHandler
             }
         }
 
-        Debug.Log($"[MiningLoadRoomHandler] Successfully spawned {actualSpawned}/50 gold stones (attempts: {totalAttempts})");
+        Debug.Log(
+            $"[MiningLoadRoomHandler] Successfully spawned {actualSpawned}/50 gold stones (attempts: {totalAttempts})");
         ChatManager instance = NetworkedManagerBase<ChatManager>.instance;
         if (instance != null)
         {

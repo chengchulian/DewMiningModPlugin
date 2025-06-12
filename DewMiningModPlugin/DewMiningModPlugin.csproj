@@ -646,18 +646,46 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="config\MiningResources.cs" />
+        <Compile Include="config\RewardExecutorFactory.cs" />
         <Compile Include="Constant.cs" />
         <Compile Include="DewMiningModPlugin.cs" />
+        <Compile Include="entry\MiningRewardEnum.cs" />
         <Compile Include="entry\MonsterSpawnData.cs" />
-        <Compile Include="entry\RewardEntry.cs" />
+        <Compile Include="entry\RewardConfigEntry.cs" />
+        <Compile Include="executor\impl\RewardExecutor_AltarOfCleansing.cs" />
+        <Compile Include="executor\impl\RewardExecutor_Boss.cs" />
+        <Compile Include="executor\impl\RewardExecutor_Chaos.cs" />
+        <Compile Include="executor\impl\RewardExecutor_Concept.cs" />
+        <Compile Include="executor\impl\RewardExecutor_Disintegration.cs" />
+        <Compile Include="executor\impl\RewardExecutor_Enlightenment.cs" />
+        <Compile Include="executor\impl\RewardExecutor_FragmentOfRadiance.cs" />
+        <Compile Include="executor\impl\RewardExecutor_Gemslot.cs" />
+        <Compile Include="executor\impl\RewardExecutor_Guidance.cs" />
+        <Compile Include="executor\impl\RewardExecutor_Hatred.cs" />
+        <Compile Include="executor\impl\RewardExecutor_LoopCat.cs" />
+        <Compile Include="executor\impl\RewardExecutor_Memory.cs" />
+        <Compile Include="executor\impl\RewardExecutor_Merchant.cs" />
+        <Compile Include="executor\impl\RewardExecutor_MerchantBackpack.cs" />
+        <Compile Include="executor\impl\RewardExecutor_MiniBoss.cs" />
+        <Compile Include="executor\impl\RewardExecutor_Monster.cs" />
+        <Compile Include="executor\impl\RewardExecutor_Nothing.cs" />
+        <Compile Include="executor\impl\RewardExecutor_Retrospection.cs" />
+        <Compile Include="executor\impl\RewardExecutor_StarCookie.cs" />
+        <Compile Include="executor\impl\RewardExecutor_UpgradeWell.cs" />
+        <Compile Include="executor\IRewardExecutor.cs" />
         <Compile Include="handler\MiningLoadRoomHandler.cs" />
         <Compile Include="handler\StoneGoldOnDeathHandler.cs" />
+        <Compile Include="manager\MiningRewardManager.cs" />
+        <Compile Include="manager\MonsterSpawnDataProvider.cs" />
+        <Compile Include="manager\MonsterSpawnQueueListener.cs" />
+        <Compile Include="manager\StoneMonsterCountManager.cs" />
         <Compile Include="patch\GameManagerPatch.cs" />
         <Compile Include="patch\PropEntityPatch.cs" />
         <Compile Include="patch\PropEnt_Stone_GoldPatch.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="util\MessageUtil.cs" />
-        <Compile Include="util\MiningRewardUtil.cs" />
+        <Compile Include="util\MiningUtil.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
