@@ -18,16 +18,9 @@ public static class MonsterSpawnQueueListener
     private static WaitForSeconds _spawnBatchWait = new WaitForSeconds(spawnBatchDelay);
     private static WaitForSeconds _spawnRetryWait = new WaitForSeconds((retryWaitTime));
     
-    private static bool enabled;
     
     public static IEnumerator DequeueLoop()
     {
-        if (enabled)
-        {
-
-            yield break;
-        }
-        enabled = true;
         while (true)
         {
             int spawnedThisFrame = 0;
