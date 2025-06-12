@@ -89,8 +89,8 @@ public static class MiningResources
 
     private static List<RewardConfigEntry> DefaultConfig =>
     [
-        new() { type = "Nothing", weight = 0.5f, enabled = true },
-        new() { type = "Monster", weight = 0.2f, enabled = true },
+        new() { type = "Nothing", weight = 0.65f, enabled = true },
+        new() { type = "Monster", weight = 0.3f, enabled = true },
         new() { type = "MiniBoss", weight = 0.01f, enabled = true },
         new() { type = "Boss", weight = 0.001f, enabled = true },
         new() { type = "Merchant", weight = 0.001f, enabled = true },
@@ -108,7 +108,7 @@ public static class MiningResources
         new() { type = "LoopCat", weight = 0.0005f, enabled = true },
         new() { type = "MerchantBackpack", weight = 0.003f, enabled = true },
         new() { type = "StarCookie", weight = 0.004f, enabled = true },
-        new() { type = "Gemslot", weight = 0.003f, enabled = true }
+        new() { type = "Gemslot", weight = 0.004f, enabled = true }
     ];
 
 
