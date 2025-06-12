@@ -16,7 +16,7 @@ public class RewardExecutor_Enlightenment : IRewardExecutor
         Dew.CreateActor(byType, gold.position, Quaternion.identity, null,
             delegate(Shrine_Enlightenment shrine)
             {
-                shrine.maxUseCount = DewPlayer.humanPlayers.Count;
+                shrine.baseGoldCost  = 45;
             });
 
 

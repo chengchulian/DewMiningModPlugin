@@ -6,7 +6,7 @@ namespace DewMiningModPlugin.executor.impl;
 
 public class RewardExecutor_Concept : IRewardExecutor
 {
-    private readonly Color _color = Color.magenta;
+    private readonly Color _color = Color.cyan;
 
     public IEnumerator ProcessRewardAsync(PropEnt_Stone_Gold gold, EventInfoKill info)
     {

@@ -15,7 +15,10 @@ public class RewardExecutor_Retrospection : IRewardExecutor
         // 回顾残片 记忆
         Shrine_Retrospection byType = DewResources.GetByType<Shrine_Retrospection>();
         Dew.CreateActor(byType, gold.position, Quaternion.identity, null,
-            delegate(Shrine_Retrospection shrine) { shrine.maxUseCount = DewPlayer.humanPlayers.Count; });
+            delegate(Shrine_Retrospection shrine)
+            {
+                shrine.baseGoldCost  = 45;
+            });
 
         MessageUtil.SendChatMessageOptimized($"恭喜！发现了一座<color={MiningUtil.ColorToHex(_color)}>回顾祭坛</color>!");
     }

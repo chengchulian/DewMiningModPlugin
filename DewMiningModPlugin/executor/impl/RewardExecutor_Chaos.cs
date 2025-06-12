@@ -8,9 +8,14 @@ public class RewardExecutor_Chaos : IRewardExecutor
 {
     public IEnumerator ProcessRewardAsync(PropEnt_Stone_Gold gold, EventInfoKill info)
     {
+
+
         yield return new WaitForSeconds(0.1f);
+        
+        bool randomBool = Random.value > 0.7f;
         //混沌
-        Shrine_Chaos shrineChaos = Dew.CreateActor<Shrine_Chaos>(gold.position, Quaternion.identity);
+        Shrine_Chaos shrineChaos = Dew.CreateActor(gold.position, Quaternion.identity, null,
+            delegate(Shrine_Chaos chaos) { chaos.SetRandomRarity(randomBool); });
         Rarity shrineChaosRarity = shrineChaos.rarity;
 
         Color color = MiningUtil.GetColorByRarity(shrineChaosRarity);
