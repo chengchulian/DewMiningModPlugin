@@ -117,7 +117,7 @@ public static class MiningLoadRoomHandler
             yield break;
         }
 
-        Actor stonePrefab = DewResources.FindOneByTypeSubstring<Actor>("PropEnt_Stone_Gold");
+        PropEnt_Stone_Gold stonePrefab = DewResources.FindOneByTypeSubstring<PropEnt_Stone_Gold>("PropEnt_Stone_Gold");
         if (stonePrefab == null)
         {
             Debug.LogError("[MiningLoadRoomHandler] Could not find PropEnt_Stone_Gold prefab!");
@@ -195,13 +195,13 @@ public static class MiningLoadRoomHandler
                     Mathf.Round(vector.z * 10f) / 10f);
                 if (!exactPositions.Contains(vector5))
                 {
-                    Actor actor = Dew.CreateActor(stonePrefab, vector, Quaternion.identity);
-                    if (actor != null)
+                    PropEnt_Stone_Gold gold = Dew.CreateActor(stonePrefab, vector, Quaternion.identity);
+                    if (gold != null)
                     {
                         exactPositions.Add(vector5);
                         num = actualSpawned;
                         actualSpawned = num + 1;
-                        actor.transform.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+                        gold.transform.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
                     }
 
                     if (actualSpawned % 5 == 0)
